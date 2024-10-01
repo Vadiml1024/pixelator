@@ -1,0 +1,7 @@
+
+tensorflow-macos
+tensorflow-metal
+moviepy
+opencv-python
+tqdm
+mtcnn

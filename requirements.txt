@@ -1,0 +1,6 @@
+
+tensorflow
+moviepy
+opencv-python
+tqdm
+mtcnn
