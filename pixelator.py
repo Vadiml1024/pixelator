@@ -22,7 +22,7 @@ logging.getLogger('tensorflow').setLevel(logging.ERROR)
 mp_face_detection = mp.solutions.face_detection
 mp_drawing = mp.solutions.drawing_utils
 
-def pixelate_faces(input_file, output_file, method):
+def pixelate_faces(input_file, output_file, method, pixelation_level):
     # Load the video and audio
     video_clip = VideoFileClip(input_file)
     audio_clip = video_clip.audio
@@ -55,7 +55,7 @@ def pixelate_faces(input_file, output_file, method):
                 if x < 0 or y < 0 or x + w > frame.shape[1] or y + h > frame.shape[0]:
                     continue
                 face_region = frame[y:y + h, x:x + w]
-                face_region_small = cv2.resize(face_region, (w // 10, h // 10), interpolation=cv2.INTER_LINEAR)
+                face_region_small = cv2.resize(face_region, (w // pixelation_level, h // pixelation_level), interpolation=cv2.INTER_LINEAR)
                 face_region_pixelated = cv2.resize(face_region_small, (w, h), interpolation=cv2.INTER_NEAREST)
                 frame[y:y + h, x:x + w] = face_region_pixelated
         elif method == 'mediapipe':
@@ -95,11 +95,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Pixelate faces in a video and preserve the original audio.")
     parser.add_argument("input_file", help="Path to the input video file.")
     parser.add_argument("output_file", help="Path to the output video file.")
-    parser.add_argument("--method", choices=['mtcnn', 'mediapipe'], default='mediapipe', help="Face detection method to use (default: mtcnn)")
+    parser.add_argument("--method", choices=['mtcnn', 'mediapipe'], default='mtcnn', help="Face detection method to use (default: mtcnn)")
+    parser.add_argument("--pixelation_level", type=int, default=10, help="Pixelation level (default: 10)")
 
     args = parser.parse_args()
 
-    # Run the pixelation function with command line arguments
+    pixelate_faces(args.input_file, args.output_file, args.method, args.pixelation_level)
     pixelate_faces(args.input_file, args.output_file, args.method)
 
 def check_gpu():
