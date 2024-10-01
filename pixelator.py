@@ -20,22 +20,23 @@ absl.logging.set_verbosity(absl.logging.ERROR)
 logging.getLogger('tensorflow').setLevel(logging.ERROR)
 
 # Disable XLA
-os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices=false'
+# os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices=false'
 
 # Enable mixed precision for better GPU performance on Apple Silicon
 mixed_precision.set_global_policy('mixed_float16')
 
 # Check if GPU is available and configure TensorFlow to use it
-gpus = tf.config.experimental.list_physical_devices('GPU')
-if gpus:
-    try:
-        for gpu in gpus:
-            tf.config.experimental.set_memory_growth(gpu, True)
-        print("Using GPU for TensorFlow.")
-    except RuntimeError as e:
-        print(e)
-else:
-    print("No GPU detected, using CPU.")
+if False:
+    gpus = tf.config.experimental.list_physical_devices('GPU')
+    if gpus:
+        try:
+            for gpu in gpus:
+                tf.config.experimental.set_memory_growth(gpu, True)
+            print("Using GPU for TensorFlow.")
+        except RuntimeError as e:
+            print(e)
+    else:
+        print("No GPU detected, using CPU.")
 
 def pixelate_faces(input_file, output_file):
     # Load the video and audio
@@ -90,7 +91,7 @@ def pixelate_faces(input_file, output_file):
     escaped_final_output = f'"{final_output_path}"'
 
     # Combine the original audio with the pixelated video using ffmpeg
-    os.system(f"ffmpeg -i {escaped_temp_video} -i {escaped_input_file} -c:v copy -c:a copy {escaped_final_output}")
+    os.system(f"ffmpeg -y -i {escaped_temp_video} -i {escaped_input_file} -c:v copy -c:a copy {escaped_final_output}")
 
     # Clean up the temporary video file
     os.remove(temp_video_path)
