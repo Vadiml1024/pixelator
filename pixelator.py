@@ -23,20 +23,8 @@ logging.getLogger('tensorflow').setLevel(logging.ERROR)
 # os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices=false'
 
 # Enable mixed precision for better GPU performance on Apple Silicon
-mixed_precision.set_global_policy('mixed_float16')
+# mixed_precision.set_global_policy('mixed_float16')
 
-# Check if GPU is available and configure TensorFlow to use it
-if False:
-    gpus = tf.config.experimental.list_physical_devices('GPU')
-    if gpus:
-        try:
-            for gpu in gpus:
-                tf.config.experimental.set_memory_growth(gpu, True)
-            print("Using GPU for TensorFlow.")
-        except RuntimeError as e:
-            print(e)
-    else:
-        print("No GPU detected, using CPU.")
 
 def pixelate_faces(input_file, output_file):
     # Load the video and audio
@@ -106,3 +94,19 @@ if __name__ == "__main__":
 
     # Run the pixelation function with command line arguments
     pixelate_faces(args.input_file, args.output_file)
+
+
+
+def check_gpu():
+# Check if GPU is available and configure TensorFlow to use it
+    if False:
+        gpus = tf.config.experimental.list_physical_devices('GPU')
+        if gpus:
+            try:
+                for gpu in gpus:
+                    tf.config.experimental.set_memory_growth(gpu, True)
+                print("Using GPU for TensorFlow.")
+            except RuntimeError as e:
+                print(e)
+        else:
+            print("No GPU detected, using CPU.")
