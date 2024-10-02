@@ -30,8 +30,8 @@ jobs:
 
       - name: Install Python for ${{ matrix.architecture }}
         run: |
-          pyenv install 3.11.7
-          pyenv global 3.11.7
+          arch -$${ matrix.architecture }} pyenv install 3.11.7
+          arch -$${ matrix.architecture }} pyenv global 3.11.7
 
       - name: Install dependencies
         run: |
@@ -40,9 +40,9 @@ jobs:
       - name: Build executable for ${{ matrix.architecture }}
         run: |
           if [ "${{ matrix.architecture }}" == "x86_64" ]; then
-            pyinstaller  --distpath dist pixelator2_intel.spec
+             arch -$${ matrix.architecture }} pyinstaller  --distpath dist pixelator2_intel.spec
           else
-            pyinstaller --distpath dist pixelator2_arm.spec
+             arch -$${ matrix.architecture }} pyinstaller --distpath dist pixelator2_arm.spec
           fi
           ls -l dist/
 
