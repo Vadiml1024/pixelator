@@ -42,14 +42,14 @@ jobs:
           if [ "${{ matrix.architecture }}" == "x86_64" ]; then
             pyinstaller  --distpath .dist pixelator2_intel.spec
           else
-            pyinstaller --distpath .dist pixelator2_arm.spec
+            pyinstaller --distpath dist pixelator2_arm.spec
           fi
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: pixelator2_${{ matrix.architecture }}
-          path: dist/pixelator2_${{ matrix.architecture }} 
+          path: /Users/runner/work/pixelator/pixelator/dist/pixelator2_${{ matrix.architecture }} 
 
   combine:
     runs-on: macos-latest
