@@ -48,7 +48,6 @@ jobs:
 
       - name: Build executable for ${{ matrix.architecture }}
         run: |
-        run: |
           if [ "${{ matrix.architecture }}" == "x86_64" ]; then
             arch -x86_64 pyinstaller pixelator2_intel.spec
           else
