@@ -85,7 +85,7 @@ def pixelate_faces(input_file, output_file, method, pixelation_level):
     escaped_temp_video = f'"{temp_video_path}"'
     escaped_final_output = f'"{final_output_path}"'
 
-    os.system(f"ffmpeg -y -i {escaped_temp_video} -i {escaped_input_file} -c:v copy -c:a copy {escaped_final_output}")
+    os.system(f"ffmpeg -y -q -i {escaped_temp_video} -i {escaped_input_file} -c:v copy -c:a copy {escaped_final_output}")
 
     # Clean up the temporary video file
     os.remove(temp_video_path)
