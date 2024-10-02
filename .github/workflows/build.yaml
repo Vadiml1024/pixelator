@@ -55,11 +55,11 @@ jobs:
           fi
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: pixelator2_${{ matrix.architecture }}
           path: dist/pixelator2_${{ matrix.architecture }}
-
+          
   combine:
     runs-on: macos-latest
     needs: build
