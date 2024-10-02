@@ -23,7 +23,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='pixelator2_intel',
+    name='pixelator2_x86_64',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

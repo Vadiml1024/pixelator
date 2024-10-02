@@ -23,7 +23,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='pixelator2_arm',
+    name='pixelator2_arm64',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
