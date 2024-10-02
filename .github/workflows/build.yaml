@@ -74,7 +74,7 @@ jobs:
 
       - name: Combine executables using lipo
         run: |
-          lipo -create -output dist/pixelator2_universal dist/x86_64/pixelator2_intel dist/arm64/pixelator2_arm
+          lipo -create -output dist/pixelator2_universal dist/x86_64/pixelator2_x86_64 dist/arm64/pixelator2_arm64
 
       - name: Upload universal binary
         uses: actions/upload-artifact@v3
