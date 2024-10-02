@@ -30,28 +30,19 @@ jobs:
 
       - name: Install Python for ${{ matrix.architecture }}
         run: |
-          if [ "${{ matrix.architecture }}" == "x86_64" ]; then
-            arch -x86_64 pyenv install 3.11.7
-            arch -x86_64 pyenv global 3.11.7
-          else
-            arch -arm64 pyenv install 3.11.7
-            arch -arm64 pyenv global 3.11.7
-          fi
+          pyenv install 3.11.7
+          pyenv global 3.11.7
 
       - name: Install dependencies
         run: |
-          if [ "${{ matrix.architecture }}" == "x86_64" ]; then
-            arch -x86_64 pip install pyinstaller
-          else
-            arch -arm64 pip install pyinstaller
-          fi
+          pip install pyinstaller
 
       - name: Build executable for ${{ matrix.architecture }}
         run: |
           if [ "${{ matrix.architecture }}" == "x86_64" ]; then
-            arch -x86_64 pyinstaller pixelator2_intel.spec
+            pyinstaller pixelator2_intel.spec
           else
-            arch -arm64 pyinstaller pixelator2_arm.spec
+            pyinstaller pixelator2_arm.spec
           fi
 
       - name: Upload build artifacts
