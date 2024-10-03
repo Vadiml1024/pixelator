@@ -25,6 +25,15 @@ jobs:
         with:
           python-version: 3.11
 
+      - name: Install dependencies
+        run: |
+          if [ "${{ matrix.architecture }}" == "x86_64" ]; then
+            arch -x86_64 pyenv install 3.11.7
+            arch -x86_64 pyenv global 3.11.7
+          else
+            echo no dependecies of **arm7**
+          fi  
+
       - name: Install pyenv
         run: brew install pyenv
 
