@@ -33,12 +33,12 @@ jobs:
           if [ "${{ matrix.architecture }}" == "x86_64" ]; then
             arch -x86_64 pyenv install 3.11.7
             arch -x86_64 pyenv global 3.11.7
-
           else
             arch -arm64 pyenv install 3.11.7
             arch -arm64 pyenv global 3.11.7
           fi
         env:
+          pythonLocation: /Users/runner/hostedtoolcache/Python/3.11.9/${{ matrix.architecture }}
           ARCHFLAGS: "-arch ${{ matrix.architecture }}"
 
       - name: Install dependencies
