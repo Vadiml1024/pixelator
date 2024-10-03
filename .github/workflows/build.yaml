@@ -28,8 +28,8 @@ jobs:
       - name: Install dependencies
         run: |
           if [ "${{ matrix.architecture }}" == "x86_64" ]; then
-            arch -x86_64 pyenv install 3.11.7
-            arch -x86_64 pyenv global 3.11.7
+            arch -x86_64 brew install gettext readline
+            arch -x86_64 brew link --force gettext readline
           else
             echo no dependecies of **arm7**
           fi  
